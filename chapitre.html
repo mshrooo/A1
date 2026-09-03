@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapitre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Spectral:wght@300;400;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="chapitre">
+<nav class="topnav"></nav>
+<div class="sheet">
+<div id="ref" class="ref"></div>
+<div id="start-block"><button class="cta" id="startBtn" data-start>Commencer</button><p class="kbd-hint"><kbd>1</kbd>–<kbd>4</kbd> répondre · <kbd>Entrée</kbd> suivant · <kbd>←</kbd> retour · <kbd>R</kbd> quitter le drill</p></div>
+  <div id="quiz" class="hide">
+    <div class="meta"><span id="pos"></span><span class="streak" id="streak"></span></div>
+    <div class="bar"><i id="fill"></i></div>
+    <span class="tag" id="tag"></span>
+    <p class="q" id="qtext"></p>
+    <div class="opts" id="opts"></div>
+    <div class="expl hide" id="expl"></div>
+    <div class="nav">
+      <button class="ghost" id="back">← Retour</button>
+      <button id="next" class="hide">Suivant →</button>
+    </div>
+  </div>
+  <div id="results" class="hide">
+    <h1>Résultats</h1>
+    <div class="score-line" id="score"></div>
+    <p class="verdict-line" id="verdict"></p>
+    <table id="table"></table>
+    <div class="nav">
+      <button id="errBtn" class="hide"></button>
+      <button class="ghost" id="review">Revoir les questions</button>
+      <button class="ghost" id="again">Retour à la fiche</button>
+    </div>
+  </div>
+</div>
+<p class="foot">Français Progressif 1 — fiches et drills personnels</p>
+<script src="assets/manifest.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
