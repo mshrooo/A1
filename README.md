@@ -1,30 +1,42 @@
-# Français Progressif 1 — fiches & drills
+# Français Progressif — fiches, drills & deck Anki
 
-Site statique : fiches de révision + drills interactifs + examen final.
+Site : fiches de révision + drills interactifs + examen final + deck Anki, générés à partir des mêmes fichiers.
+
+## Ajouter un chapitre (le seul geste à faire)
+
+1. Copie `assets/chapters/_TEMPLATE.js` → `L26.js` (le nom du fichier = la clé du chapitre), remplis-le.
+2. Sur GitHub : ouvre le dossier `assets/chapters/` → **Add file → Upload files** → dépose `L26.js` → **Commit**.
+
+C'est tout. ~1 minute plus tard, le menu, l'accueil, l'examen et le deck Anki contiennent la leçon.
+
+- Remplacer un fichier : upload un fichier du même nom, il écrase l'ancien (pas besoin de supprimer avant).
+- Si un chapitre a une erreur, l'onglet **Actions** affiche ❌ avec le fichier et la question fautive. Le site en ligne garde la dernière bonne version.
+- Ordre automatique : L1…L33, puis autres préfixes numérotés (ex. `P2L1` pour FP2), puis le reste (CONN, VOCAB).
+
+## Le deck Anki
+
+Lien « Deck Anki » sur la page d'accueil (`francais-fp1.apkg`). Réimporte-le quand tu veux : les cartes existantes sont mises à jour, pas dupliquées, et ton historique de révision est conservé.
+Sous-decks : Vocabulaire (champ `vocab` des chapitres, 2 sens) · Contexte · Conjugaison (+ dictée) · Règles.
 
 ## Structure
+
 ```
-index.html            accueil (cartes générées automatiquement)
-chapitre.html         page générique — chapitre.html?ch=L13, ?ch=L15, …
-examen.html           examen : ~moitié de chaque chapitre, tiré au hasard
-dialogue.html         interview orale + dictée des verbes
-assets/
-  manifest.js         ← LA liste des chapitres (une ligne par chapitre)
-  app.js              moteur (nav, accueil, examen, quiz) — ne pas toucher
-  style.css
-  chapters/
-    _TEMPLATE.js      modèle à copier
-    L13.js L15.js L16.js CONN.js   un fichier = fiche + questions
+index.html, chapitre.html, examen.html, dialogue.html
+assets/app.js, style.css
+assets/manifest.js        généré à la publication (copie locale seulement)
+assets/chapters/*.js      UN fichier = fiche + questions + vocab
+tools/build.mjs           vérifie les chapitres, construit le site
+tools/build_anki.py       construit le deck Anki
+.github/workflows/deploy.yml
 ```
 
-## Ajouter un chapitre (ex. leçon 17)
-1. Copier `assets/chapters/_TEMPLATE.js` → `assets/chapters/L17.js`, remplir
-   `name`, `short`, `desc`, la fiche HTML dans `ref`, et les questions dans `bank`
-   (la 1re option est toujours la bonne réponse ; tout est mélangé à l'affichage).
-2. Ajouter `"L17"` dans `CHAPTER_LIST` (`assets/manifest.js`).
+## Réglage unique (déjà fait une fois)
 
-C'est tout : le menu, l'accueil et l'examen final intègrent le chapitre
-automatiquement. Aucune autre page à modifier.
+Settings → Pages → Build and deployment → Source : **GitHub Actions**.
 
-## Déploiement
-GitHub Pages → Settings → Pages → Deploy from branch (`main`, root ou /docs).
+## Tester en local (optionnel)
+
+```
+node tools/build.mjs && pip install genanki && python3 tools/build_anki.py
+cd _site && python3 -m http.server 8000
+```

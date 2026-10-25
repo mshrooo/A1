@@ -74,7 +74,7 @@ registerChapter("VOCAB", {
     {q:"Ce vieux clavier ne marche plus : je le —.",
      o:["remplace", "remercie", "rappelle", "retrouve"],
      e:"Remplacer = to replace. You could remercier (thank) the keyboard for its service first, I suppose."},
-    {q:"Je — plusieurs serveurs en même temps — c'est mon travail.",
+    {q:"Je — plusieurs serveurs en même temps : c'est mon travail.",
      o:["gère", "goûte", "gèle", "gagne"],
      e:"Gérer = to manage/handle: je gère les serveurs, je gère la situation. Geler = freeze — hopefully not the servers."},
     {q:"À 18 heures, j'— mon ordinateur et je — le bureau.",

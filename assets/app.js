@@ -47,12 +47,17 @@ function buildIndex(){
   });
   h += '<a href="dialogue.html"><b>Ma journée — dialogue</b><small>Interview pour parler (15 questions) + dictée des verbes à taper (41 blancs)</small></a>';
   const tot = CHAPTER_LIST.reduce((n,k)=>n+examCount(CHAPTERS[k].bank.length),0);
+  h += '<a href="francais-fp1.apkg" download><b>Deck Anki</b><small>Toutes les fiches en flashcards, mis à jour à chaque publication · à importer dans Anki</small></a>';
   h += '<a href="examen.html"><b>Examen final</b><small>'+tot+' questions tirées au hasard de tous les chapitres</small></a>';
   box.innerHTML = h;
 }
 
 /* ---------- examen : échantillonnage automatique ---------- */
-function examCount(bankLen){ return Math.max(5, Math.min(15, Math.ceil(bankLen/2))); }
+const EXAM_TARGET = 60;   // total exam size, spread across all chapters
+function examCount(bankLen){
+  const per = Math.max(3, Math.floor(EXAM_TARGET / CHAPTER_LIST.length));
+  return Math.min(bankLen, per);
+}
 function buildExamQueue(){
   let all = [];
   CHAPTER_LIST.forEach(k=>{
@@ -234,7 +239,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(page==='examen'){
       buildNav('examen');
       const tot = CHAPTER_LIST.reduce((n,k)=>n+examCount(CHAPTERS[k].bank.length),0);
-      $('examDesc').textContent = tot+" questions tirées au hasard à chaque essai — jusqu’à 15 questions par chapitre ("+CHAPTER_LIST.map(k=>CHAPTERS[k].short).join(', ')+"). Refais-le, il sera différent.";
+      $('examDesc').textContent = tot+" questions tirées au hasard à chaque essai — quelques questions par chapitre ("+CHAPTER_LIST.map(k=>CHAPTERS[k].short).join(', ')+"). Refais-le, il sera différent.";
       $('startBtn').textContent="Commencer l'examen ("+tot+" questions)";
       QUEUE_BUILDER=buildExamQueue;
       wireQuizUI();
